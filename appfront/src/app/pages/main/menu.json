@@ -1,0 +1,17 @@
+[
+    {
+        "title": "Menu",
+        "icon": "user",
+        "open": false,
+        "selected": false,
+        "children": [
+            {
+                "title": "Empleados",
+                "icon": "bars",
+                "selected": false,
+                "url": "main/list-employees",
+                "children": []
+            }
+        ]
+    }
+]

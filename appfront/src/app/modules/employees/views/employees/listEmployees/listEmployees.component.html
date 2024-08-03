@@ -1,0 +1,82 @@
+<div>
+    <breadcrumb-component [inplsbreadcrumb]="breadcrumb"></breadcrumb-component>
+    <div class="contentBody mt-4">
+        <nz-spin [nzSize]="'large'" [nzSpinning]="loading()" nzTip="Cargando...">
+            <div class="mb-4">
+                <div class="row mb-3">
+                    <div class="col-12 col-sm-12 col-md-5 col-lg-4 col-xl-4 col-xxl-4">
+                        <nz-form-item class="me-3">
+                            <nz-form-control [nzSpan]="'horizontal'">
+                                <nz-form-label [nzSpan]="'horizontal'">Nombre</nz-form-label>
+                                <input (keyup.enter)="btnFilter(false)" nz-input placeholder="Nombre"
+                                    [(ngModel)]="filter.name" type="text" />
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-5 col-lg-4 col-xl-4 col-xxl-4">
+                        <nz-form-item class="me-3">
+                            <nz-form-control [nzSpan]="'horizontal'">
+                                <nz-form-label [nzSpan]="'horizontal'">Identificación</nz-form-label>
+                                <input (keyup.enter)="btnFilter(false)" nz-input placeholder="Identificación"
+                                    [(ngModel)]="filter.identification" />
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-3">
+                        <button (click)="btnFilter(false)" class="me-3" nz-button type="button" nzType="default">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                        <button (click)="btnFilter(true)" nz-button type="button" nzType="default">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                        <button type="button" (click)="getDetailsEmployee(null, true)" nz-button nzType="default">
+                            Crear
+                        </button>
+                    </div>
+                </div>
+                <div>
+                    <nz-table (nzQueryParams)="onQueryParamsChange($event)" [nzFrontPagination]="false" #sortTable
+                        [nzData]="lsEmployees" nzTableLayout="fixed">
+                        <thead>
+                            <tr>
+                                <th>Foto</th>
+                                <th>Identificación</th>
+                                <th>Nombre</th>
+                                <th>Fecha ingreso</th>
+                                <th>Cargo</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for(item of sortTable.data; track item.id){
+                            <tr>
+                                <td>
+                                    <div>
+                                        <img class="w-100" [src]="item.urlImage" alt="Sin imagen">
+                                    </div>
+                                </td>
+                                <td>{{ item.identification }}</td>
+                                <td>{{ item.name }}</td>
+                                <td>{{ item.dateRegistry | date:'MMMM-yyy' }}</td>
+                                <td>{{ item.txtJob }}</td>
+                                <td>
+                                    <button type="button" (click)="getDetailsEmployee(item.id, false)" class="ms-2 me-3"
+                                        nz-button nzType="default">
+                                        Detalle
+                                    </button>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </nz-table>
+                    <nz-pagination class="mt-3" (nzPageIndexChange)="changePage($event)"
+                        (nzPageSizeChange)="changeSize($event)" [nzTotal]="metaData.countTotal"
+                        [nzPageIndex]="filter.PageNumber" [nzPageSize]="filter.PageSize"
+                        [nzPageSizeOptions]="[1, 25, 50, 75, 100]" nzShowSizeChanger></nz-pagination>
+                </div>
+            </div>
+        </nz-spin>
+    </div>
+</div>

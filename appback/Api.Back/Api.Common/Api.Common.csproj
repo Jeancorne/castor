@@ -1,0 +1,87 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Dictionary\ClsJobs\**" />
+    <Compile Remove="Language\**" />
+    <EmbeddedResource Remove="Dictionary\ClsJobs\**" />
+    <EmbeddedResource Remove="Language\**" />
+    <None Remove="Dictionary\ClsJobs\**" />
+    <None Remove="Language\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Api.Core\Api.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Dictionary\ClsEmployees\en_US\ClsEmployeesMessage_en_US.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ClsEmployeesMessage_en_US.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Dictionary\ClsEmployees\es_ES\ClsEmployeesMessage_es_ES.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ClsEmployeesMessage_es_ES.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Dictionary\ClsUser\en_US\ClsUserMessage_en_US.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ClsUserMessage_en_US.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Dictionary\ClsUser\es_ES\ClsUserMessage_es_ES.Designer.cs">
+      <DependentUpon>ClsUserMessage_es_ES.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Dictionary\Generic\en_US\GenericMessage_en_US.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GenericMessage_en_US.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Dictionary\Generic\es_ES\GenericMessage_es_ES.Designer.cs">
+      <DependentUpon>GenericMessage_es_ES.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Dictionary\ClsEmployees\en_US\ClsEmployeesMessage_en_US.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClsEmployeesMessage_en_US.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Dictionary\ClsEmployees\es_ES\ClsEmployeesMessage_es_ES.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClsEmployeesMessage_es_ES.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Dictionary\ClsUser\en_US\ClsUserMessage_en_US.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClsUserMessage_en_US.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Dictionary\ClsUser\es_ES\ClsUserMessage_es_ES.resx">
+      <LastGenOutput>ClsUserMessage_es_ES.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Dictionary\Generic\en_US\GenericMessage_en_US.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>GenericMessage_en_US.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Dictionary\Generic\es_ES\GenericMessage_es_ES.resx">
+      <LastGenOutput>GenericMessage_es_ES.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

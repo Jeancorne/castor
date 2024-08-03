@@ -1,0 +1,127 @@
+<nz-spin [nzSize]="'large'" [nzSpinning]="loading()" nzTip="Cargando...">
+    <div>
+        <div>
+            <div>
+                <form nz-form [nzLayout]="'vertical'" [formGroup]="formDetailsEmployee" class="formDetailsEmployee">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                            <nz-form-item>
+                                <nz-form-label nzRequired>Nombre</nz-form-label>
+                                <nz-form-control [nzErrorTip]="nameError">
+                                    <input type="text" nz-input formControlName="name" placeholder="Nombre" />
+                                </nz-form-control>
+                                <ng-template #nameError let-control>
+                                    @if(formDetailsEmployee.controls['name'].errors?.['required'] &&
+                                    !formDetailsEmployee.controls['name'].pristine){
+                                    <div class="text-start form-text text-danger alert-danger">
+                                        Nombre obligatorio
+                                    </div>
+                                    }
+                                    @if(formDetailsEmployee.controls['name'].errors?.['pattern'] &&
+                                    !formDetailsEmployee.controls['name'].pristine){
+                                    <div class="text-start form-text text-danger alert-danger">
+                                        Nombre no válida
+                                    </div>
+                                    }
+                                </ng-template>
+                            </nz-form-item>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                            <nz-form-item>
+                                <nz-form-label nzRequired>Identificación</nz-form-label>
+                                <nz-form-control [nzErrorTip]="identificationError">
+                                    <input type="text" nz-input formControlName="identification"
+                                        placeholder="Identificación" />
+                                </nz-form-control>
+                                <ng-template #identificationError let-control>
+                                    @if(formDetailsEmployee.controls['identification'].errors?.['required'] &&
+                                    !formDetailsEmployee.controls['identification'].pristine){
+                                    <div class="text-start form-text text-danger alert-danger">
+                                        Identificación obligatorio
+                                    </div>
+                                    }
+                                    @if(formDetailsEmployee.controls['identification'].errors?.['pattern'] &&
+                                    !formDetailsEmployee.controls['identification'].pristine){
+                                    <div class="text-start form-text text-danger alert-danger">
+                                        Identificación no válido
+                                    </div>
+                                    }
+                                </ng-template>
+                            </nz-form-item>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                            <nz-form-item>
+                                <nz-form-label nzRequired>Fecha ingreso</nz-form-label>
+                                <nz-form-control [nzErrorTip]="dateRegistryError">
+                                    <nz-date-picker class="w-100" nzPlaceHolder="Seleccionar fecha" nzMode="date"
+                                        formControlName="dateRegistry"></nz-date-picker>
+                                </nz-form-control>
+                                <ng-template #dateRegistryError let-control>
+                                    @if(formDetailsEmployee.controls['dateRegistry'].errors?.['required'] &&
+                                    !formDetailsEmployee.controls['dateRegistry'].pristine){
+                                    <div class="text-start form-text text-danger alert-danger">
+                                        Identificación obligatorio
+                                    </div>
+                                    }
+                                    @if(formDetailsEmployee.controls['dateRegistry'].errors?.['pattern'] &&
+                                    !formDetailsEmployee.controls['dateRegistry'].pristine){
+                                    <div class="text-start form-text text-danger alert-danger">
+                                        Identificación no válido
+                                    </div>
+                                    }
+                                </ng-template>
+                            </nz-form-item>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                            <nz-form-item>
+                                <nz-form-control [nzErrorTip]="idJobTitleError">
+                                    <nz-form-label nzRequired>Cargo</nz-form-label>
+                                    <nz-input-group class="w-100" [nzSize]="'default'">
+                                        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Seleccionar cargo"
+                                            formControlName="idJobTitle">
+                                            @for(job of lsJobsTitles; track job.id){
+                                            <nz-option nzValue="default" nzLabel="{{job.name}}" nzValue="{{job.id}}">
+                                            </nz-option>
+                                            }
+                                        </nz-select>
+                                    </nz-input-group>
+                                    <ng-template #idJobTitleError let-control>
+                                        @if(formDetailsEmployee.controls['idJobTitle'].errors?.['required'] &&
+                                        !formDetailsEmployee.controls['idJobTitle'].pristine){
+                                        <div class="text-start form-text text-danger alert-danger"> Cargo obligatorio
+                                        </div>
+                                        }
+                                        @if(formDetailsEmployee.controls['idJobTitle'].errors?.['pattern'] &&
+                                        !formDetailsEmployee.controls['idJobTitle'].pristine){
+                                        <div class="text-start form-text text-danger alert-danger">
+                                            Cargo no válido
+                                        </div>
+                                        }
+
+                                    </ng-template>
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                            <nz-form-item>
+                                <nz-upload [nzListType]="'picture'" [nzShowUploadList]="false"
+                                    [nzBeforeUpload]="beforeUpload">
+                                    <button nz-button>
+                                        <span nz-icon nzType="upload"></span>
+                                        Upload
+                                    </button>
+                                </nz-upload>
+                            </nz-form-item>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                            <button nz-button [disabled]="!formDetailsEmployee.valid" (click)="btnUpdate()"
+                                class="w-10 mb-3" type="submit" nzType="primary">
+                                {{ isNew === true ? 'Crear' :'Actualizar'}}
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</nz-spin>

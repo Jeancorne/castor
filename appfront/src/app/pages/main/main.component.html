@@ -1,0 +1,83 @@
+<nz-layout class="layout">
+    <nz-sider [nzTheme]="'light'" class="sideBar" nzBreakpoint="lg" [(nzCollapsed)]="isCollapsed"
+        [nzCollapsedWidth]="0">
+        <div class="selectModule">
+            <div (click)="navigation('main')" class="text-center pointer mainInit">
+                <p><strong> Inicio </strong></p>
+            </div>
+        </div>
+        <ul nz-menu nzTheme="light" nzMode="inline">
+            @for(firstMenu of lsMenus; track firstMenu.id){
+            <li nz-submenu nzTitle="{{firstMenu.title}}" nzIcon="{{firstMenu.icon}}" [nzOpen]="false">
+                <ul>
+                    @if(firstMenu.children.length === 0){
+                    <li (click)="navigation(firstMenu.url)" nz-submenu nzIcon="{{firstMenu.icon}}" nz-menu-item>
+                        <p>{{ firstMenu.title }}</p>
+                    </li>
+                    }
+                    @for(twoMenu of firstMenu.children; track twoMenu.id){
+                    <div>
+                        <ul>
+                            @if(twoMenu.children?.length === 0){
+                            <li (click)="navigation(twoMenu.url)" nz-menu-item>
+                                <p>{{twoMenu.title }} </p>
+                            </li>
+                            }
+                            @if(twoMenu.children?.length > 0){
+                            <li nz-submenu nzIcon="{{firstMenu.icon}}" nz-submenu nzTitle="{{ twoMenu.title }}">
+                                @for(threeMenu of twoMenu.children; track threeMenu.id){
+                                <div>
+                                    <ul>
+                                        @if(threeMenu.children?.length === 0){
+                                        <li (click)="navigation(threeMenu.url)" [nzSelected]="threeMenu.selected"
+                                            nz-menu-item>
+                                            <p>{{ threeMenu.title }} </p>
+                                        </li>
+                                        }
+
+                                    </ul>
+                                </div>
+                                }
+                            </li>
+                            }
+                        </ul>
+                    </div>
+                    }
+                </ul>
+            </li>
+            }
+        </ul>
+    </nz-sider>
+    <nz-layout>
+        <nz-header>
+            <div class="d-flex">
+                <div>
+                    <span class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+                        (click)="isCollapsed = !isCollapsed"></span>
+                </div>
+                <div class="d-flex ms-auto">
+                    <div class="ms-auto me-sm-1">
+                        <a nz-dropdown [nzPlacement]="'bottomRight'" [nzDropdownMenu]="menu">
+                            <i class="fas fa-user fa-fw iconUser"></i>
+                        </a>
+                        <nz-dropdown-menu #menu="nzDropdownMenu">
+                            <ul nz-menu>
+                                <li nz-menu-item (click)="logout()">Salir</li>
+                            </ul>
+                        </nz-dropdown-menu>
+                    </div>
+                </div>
+            </div>
+        </nz-header>
+        <nz-content>
+            <div class="inner-content">
+                <router-outlet></router-outlet>
+            </div>
+        </nz-content>
+        <nz-footer>
+            <div>
+                © 2024 CASTOR
+            </div>
+        </nz-footer>
+    </nz-layout>
+</nz-layout>

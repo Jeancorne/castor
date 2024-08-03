@@ -1,0 +1,32 @@
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+@import "../node_modules/ng-zorro-antd/ng-zorro-antd.min.css";
+
+
+
+:host ::ng-deep .swal2-container {
+    z-index: 1000000 !important;
+}
+
+.swal2-container.swal2-backdrop-show,
+.swal2-container.swal2-noanimation {
+
+    z-index: 1000000 !important;
+}
+
+:host ::ng-deep .swal2-container.swal2-backdrop-show,
+.swal2-container.swal2-noanimation {
+
+    z-index: 1000000 !important;
+}
+
+.hoverBlue:hover {
+    color: #1890ff;
+}
+
+input {
+    text-align: start !important;
+}
+
+.ant-form-item-with-help .ant-form-item-explain {    
+    text-align: start !important;
+}

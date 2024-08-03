@@ -1,0 +1,168 @@
+<div class="row formulario">
+    <nz-tabset>
+        <nz-tab [nzTitle]="'Ingresar'">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <h1>Iniciar sesión</h1><br />
+                <nz-spin [nzSpinning]="loading()">
+                    <form nz-form [formGroup]="formLogin">
+                        <nz-form-item>
+                            <nz-form-control [nzErrorTip]="emailErrorsTp">
+                                <nz-input-group [nzSize]="'large'">
+                                    <input type="email" autocomplete="email" nz-input formControlName="email"
+                                        placeholder="Correo" />
+                                </nz-input-group>
+                                <ng-template #emailErrorsTp let-control>
+                                    @if(formLogin.controls['email'].hasError('required') &&
+                                    !formLogin.controls['email'].pristine){
+                                    <div class="form-text text-danger alert-danger">
+                                        Correo obligatorio
+                                    </div>
+                                    }
+                                    @if(formLogin.controls['email'].hasError('pattern') &&
+                                    !formLogin.controls['email'].pristine){
+                                    <div class="form-text text-danger alert-danger">
+                                        Correo no válido
+                                    </div>
+                                    }
+                                </ng-template>
+                            </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-control [nzErrorTip]="passwordErrorTp">
+                                <nz-input-group [nzSize]="'large'" [nzSuffix]="iconPasswordTp">
+                                    <input [type]="showPassword ? 'text' : 'password'" autocomplete="current-password"
+                                        nz-input formControlName="password" placeholder="Contraseña" />
+                                </nz-input-group>
+                                <ng-template #iconPasswordTp>
+                                    <span (click)="fnShowPassword()">
+                                        @if(showPassword){
+                                        <span><i class="pointer fa-solid fa-eye-slash"></i></span>
+                                        }
+                                        @if(!showPassword){
+                                        <span><i class="pointer fa-solid fa-eye"></i></span>
+                                        }
+                                    </span>
+                                </ng-template>
+                                <ng-template #passwordErrorTp let-control>
+                                    @if(formLogin.controls['password'].hasError('required') &&
+                                    !formLogin.controls['password'].pristine){
+                                    <div class="text-start form-text text-danger alert-danger">Contraseña
+                                        obligatorio
+                                    </div>
+                                    }
+                                </ng-template>
+                            </nz-form-control>
+                        </nz-form-item>
+                        <button nz-button [disabled]="!formLogin.valid" class="btnCreate" (click)="btnInit()"
+                            nzType="primary">Iniciar</button>                        
+                    </form>
+                </nz-spin>
+            </div>
+        </nz-tab>
+        <nz-tab [nzTitle]="'Crear usuario'">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <h1>Crear usuario</h1><br />
+                <nz-spin [nzSpinning]="loading()">
+                    <form nz-form [formGroup]="formCreateUser">
+                        <nz-form-item>
+                            <nz-form-control [nzErrorTip]="nameErrorCreate">
+                                <nz-input-group [nzSize]="'large'">
+                                    <input type="text" nz-input formControlName="name" placeholder="Nombre" />
+                                </nz-input-group>
+                                <ng-template #nameErrorCreate let-control>
+                                    @if(formCreateUser.controls['name'].hasError('required') &&
+                                    !formCreateUser.controls['name'].pristine){
+                                    <div class="text-start form-text text-danger alert-danger">
+                                        Nombre obligatorio
+                                    </div>
+                                    }
+                                </ng-template>
+                            </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-control [nzErrorTip]="lastNameErrorCreate">
+                                <nz-input-group [nzSize]="'large'">
+                                    <input type="text" nz-input formControlName="lastName" placeholder="Apellido" />
+                                </nz-input-group>
+                                <ng-template #lastNameErrorCreate let-control>
+                                    @if(formCreateUser.controls['lastName'].hasError('required') &&
+                                    !formCreateUser.controls['lastName'].pristine){
+                                    <div class="text-start form-text text-danger alert-danger">
+                                        Apellido obligatorio
+                                    </div>
+                                    }
+                                </ng-template>
+                            </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-control [nzErrorTip]="emailErrorsCreate">
+                                <nz-input-group [nzSize]="'large'">
+                                    <input type="email" autocomplete="email" nz-input formControlName="email"
+                                        placeholder="Correo" />
+                                </nz-input-group>
+                                <ng-template #emailErrorsCreate let-control>
+                                    @if(formCreateUser.controls['email'].hasError('required') &&
+                                    !formCreateUser.controls['email'].pristine){
+                                    <div class="form-text text-danger alert-danger">
+                                        Correo obligatorio
+                                    </div>
+                                    }
+                                    @if(formCreateUser.controls['email'].hasError('pattern') &&
+                                    !formCreateUser.controls['email'].pristine){
+                                    <div class="form-text text-danger alert-danger">
+                                        Correo no válido
+                                    </div>
+                                    }
+                                </ng-template>
+                            </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-control [nzErrorTip]="passwordErrorCreate">
+                                <nz-input-group [nzSize]="'large'">
+                                    <input type="password" nz-input formControlName="password"
+                                        placeholder="Contraseña" />
+                                </nz-input-group>
+                                <ng-template #passwordErrorCreate let-control>
+                                    @if(formCreateUser.controls['password'].hasError('required') &&
+                                    !formCreateUser.controls['password'].pristine){
+                                    <div class="text-start form-text text-danger alert-danger">
+                                        Contraseña obligatorio
+                                    </div>
+                                    }
+                                </ng-template>
+                            </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-control [nzErrorTip]="repeatPasswordErrorCreate">
+                                <nz-input-group [nzSize]="'large'">
+                                    <input type="password" nz-input formControlName="repeatPassword"
+                                        placeholder="Contraseña" />
+                                </nz-input-group>
+                                <ng-template #repeatPasswordErrorCreate let-control>
+                                    @if(formCreateUser.controls['repeatPassword'].hasError('required') &&
+                                    !formCreateUser.controls['repeatPassword'].pristine){
+                                    <div class="text-start form-text text-danger alert-danger">
+                                        Repetir contraseña
+                                    </div>
+                                    }
+                                </ng-template>
+                                @if(formCreateUser.errors?.['passwordsNotMatch'] === true){
+                                <div class="text-start form-text text-danger alert-danger">
+                                    Las contraseñas no coinciden
+                                </div>
+                                }
+                            </nz-form-control>
+                        </nz-form-item>
+                        <div class="w-100 mb-3">
+                            <button nz-button class="btnCreate" [disabled]="!formCreateUser.valid"
+                                (click)="btnCreateUser()" nzType="primary">Crear</button>
+                        </div>
+                        <div class="w-100">
+                            <button nz-button class="btnCreate" (click)="btnCancel()" nzType="default">Cancelar</button>
+                        </div>
+                    </form>
+                </nz-spin>
+            </div>
+        </nz-tab>
+    </nz-tabset>
+</div>
